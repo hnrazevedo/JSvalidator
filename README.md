@@ -6,6 +6,30 @@ Importe o arquivo do Script em sua página
 ```html
 <script src="https://cdn.jsdelivr.net/gh/hnrazevedo/JSvalidator/JSvalidator.js" type="text/javascript"></script>
 ```
+
+## Opções padrão
+```html
+<script>
+    Validator.options({
+        alert : function(message, classMessage) {
+            alert(m) 
+        },
+        submitter : function(formSubtEvt) {
+            formSubtEvt.target.submit();
+        },
+        return: false
+    });
+</script>
+```
+
+### Definição de opções
+```html
+alert: Função de retorno em caso de erro em input. Padrão alert(message_error)
+submitter: Função de retorno caso o furmulário seja valido. Padrão continua a submit do form
+return: Define se é para executar o submitter ou se é para retornar o resultado da validação
+```
+
+## Regras
 Para determinar um formulário para validação utilize a função load
 ```html
 <script>
@@ -35,28 +59,6 @@ minlength: Testa se atingiu o minimo de caracteres
 maxlength: Testa se ultrapassou o limite de caracteres
 regex: Testa expressão regular
 equals: Utilizada para confirmar alguma informação
-```
-
-## Opções padrão
-```html
-<script>
-    Validator.options({
-        alert : function(message, classMessage) {
-            alert(m) 
-        },
-        submitter : function(formSubtEvt) {
-            formSubtEvt.target.submit();
-        },
-        return: false
-    });
-</script>
-```
-
-### Definição de opções
-```html
-alert: Função de retorno em caso de erro em input. Padrão alert(message_error)
-submitter: Função de retorno caso o furmulário seja valido. Padrão continua a submit do form
-return: Define se é para executar o submitter ou se é para retornar o resultado da validação
 ```
 
 ### Eventos
