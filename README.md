@@ -2,7 +2,7 @@
 JS validate is a simple field validator in JS
 #### JSvalidador é um validador simples de campos em JS
 
-# Utilização
+# Use
 Import the Script file into your page
 #### Importe o arquivo do Script em sua página
 ```html
