@@ -1,37 +1,85 @@
-## Welcome to GitHub Pages
+# JSvalidator
+JS validate is a simple field validator in JS
+#### JSvalidador é um validador simples de campos em JS
 
-You can use the [editor on GitHub](https://github.com/hnrazevedo/JSvalidator/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+# Use
+Import the Script file into your page
+#### Importe o arquivo do Script em sua página
+```html
+<script src="https://cdn.jsdelivr.net/gh/hnrazevedo/JSvalidator/JSvalidator.js" type="text/javascript"></script>
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Standard options
+```html
+<script>
+    Validator.options({
+        alert : function(message, classMessage) {
+            alert(m) 
+        },
+        submitter : function(formSubtEvt) {
+            formSubtEvt.target.submit();
+        },
+        return: false
+    });
+</script>
+```
 
-### Jekyll Themes
+### Setting options
+```html
+alert: Return function in case of input error. Alert (message_error) pattern
+submitter: Return function if the form is valid. Default continues to submit form
+return: Defines whether to execute the submitter or to return the validation result
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hnrazevedo/JSvalidator/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Rules
+To determine a form for validation use the load function
+#### Para determinar um formulário para validação utilize a função load
+```html
+<script>
+  let form = document.querySelector(...);
+  Validator.load(form,...);
+</script>
+```
+The validation rules must be passed along with the form, following the standard
+#### As regras de validação devem ser passadas junto com o formulário, seguindo o padrão
+```html
+<script>
+  let form = document.querySelector(...);
+  let rules = {
+      email: {required:true, filter:274, regex:'/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', minlength:1},
+      password: {required:true, maxlength:20, minlength:6},
+      confirm_password: {required:true, equals:"password"},
+      remember_login: {required:false, maxlength:2, minlength:2},
+      birth: {required:true, type:"date", regex:'/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/'}
+  }
+  Validator.load(form,rules);
+</script>
+```
 
-### Support or Contact
+## Supported rules
+```
+required: Used to define whether information is mandatory
+minlength: Tests if the minimum number of characters has been reached
+maxlength: Tests if the character limit has been exceeded
+regex: Tests regular expression
+equals: Used to confirm some information
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Events
+Validation is triggered in the Input blur and Form submit events
+#### A validação é disparada nos eventos Input blur e Form submit
+
+### Input blur
+Tests the input that triggered the event
+#### Testa o input que disparou o evento
+
+### Form submit
+Tests all inputs passed for validation
+#### Testa todos os inputs passados para validação
+
+### Error message
+In the event that a field does not pass validation, an element ```<p>``` is sought within the form, which has the ``name`` attribute identical to that of the input and which has the class ```inputMessage```, if it does not exist and the alert function with the error message is triggered.
+#### No caso de um campo não passar na validação, é buscado um elemento ```<p>```, dentro do formulário, que tenha o atributo ```name``` idêntico ao do input e que tenha a class ```inputMessage```, caso o mesmo não existá e disparada a função alert com a mensagem de erro.
+
+### Credits
+- [Henri Azevedo](https://github.com/hnrazevedo) - Developer
